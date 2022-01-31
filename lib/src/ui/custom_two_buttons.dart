@@ -62,6 +62,15 @@ class CustomTwoButtons extends StatelessWidget {
   /// Defaults to [Axis.horizontal]
   final Axis? buttonDirection;
 
+  /// [bool] value which toggles in order to show the loading state when the right button is pressed
+  final bool? rightButtonloader;
+
+  /// [bool] value which toggles in order to show the loading state when the left button is pressed
+  final bool? leftButtonloader;
+
+  /// The [Widget] that loads when the [loader] is set to true when the button is pressed
+  final Widget? loadingIndicator;
+
   const CustomTwoButtons({
     Key? key,
     required this.leftButtonText,
@@ -69,24 +78,30 @@ class CustomTwoButtons extends StatelessWidget {
     this.leftButtonFunction,
     this.rightButtonFunction,
     this.buttonHeight = 48.0,
-    this.buttonColor = CustomColor.cpurple,
-    this.rightButtonTextStyle = const TextStyle(color: CustomColor.cpurple),
+    this.buttonColor,
+    this.rightButtonTextStyle,
     this.leftButtonTextStyle = const TextStyle(color: CustomColor.cwhite),
     this.switchButtonDecoration = false,
     this.borderRadius,
     this.splashBorderRadius,
     this.elevation = 0.0,
     this.buttonDirection = Axis.horizontal,
+    this.rightButtonloader = false,
+    this.loadingIndicator,
+    this.leftButtonloader = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    TextStyle rightTextStyle = TextStyle(color: buttonColor ?? ButtonTheme.of(context).colorScheme!.primary);
     return buttonDirection == Axis.vertical
         ? Column(
             children: <Widget>[
               Material(
                 elevation: elevation,
-                color: switchButtonDecoration ? Colors.transparent : buttonColor,
+                color: switchButtonDecoration
+                    ? Colors.transparent
+                    : buttonColor ?? ButtonTheme.of(context).colorScheme!.primary,
                 borderRadius: borderRadius,
                 child: InkWell(
                   borderRadius: splashBorderRadius,
@@ -96,7 +111,8 @@ class CustomTwoButtons extends StatelessWidget {
                     height: buttonHeight,
                     decoration: switchButtonDecoration
                         ? BoxDecoration(
-                            border: Border.all(color: buttonColor ?? CustomColor.cpurple, width: 1.5),
+                            border: Border.all(
+                                color: buttonColor ?? ButtonTheme.of(context).colorScheme!.primary, width: 1.5),
                             borderRadius: splashBorderRadius)
                         : const BoxDecoration(),
                     child: Center(
@@ -113,7 +129,9 @@ class CustomTwoButtons extends StatelessWidget {
               rightButtonText == null
                   ? Container()
                   : Material(
-                      color: switchButtonDecoration ? buttonColor : Colors.transparent,
+                      color: switchButtonDecoration
+                          ? buttonColor ?? ButtonTheme.of(context).colorScheme!.primary
+                          : Colors.transparent,
                       borderRadius: borderRadius,
                       child: InkWell(
                         borderRadius: splashBorderRadius,
@@ -123,7 +141,8 @@ class CustomTwoButtons extends StatelessWidget {
                           decoration: switchButtonDecoration
                               ? const BoxDecoration()
                               : BoxDecoration(
-                                  border: Border.all(color: buttonColor ?? CustomColor.cpurple, width: 1),
+                                  border: Border.all(
+                                      color: buttonColor ?? ButtonTheme.of(context).colorScheme!.primary, width: 1),
                                   borderRadius: splashBorderRadius),
                           height: buttonHeight,
                           child: Center(
@@ -146,7 +165,9 @@ class CustomTwoButtons extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 4.0),
                   child: Material(
                     elevation: elevation,
-                    color: switchButtonDecoration ? Colors.transparent : buttonColor,
+                    color: switchButtonDecoration
+                        ? Colors.transparent
+                        : buttonColor ?? ButtonTheme.of(context).colorScheme!.primary,
                     borderRadius: borderRadius,
                     child: InkWell(
                       borderRadius: splashBorderRadius,
@@ -155,16 +176,35 @@ class CustomTwoButtons extends StatelessWidget {
                         height: buttonHeight,
                         decoration: switchButtonDecoration
                             ? BoxDecoration(
-                                border: Border.all(color: buttonColor ?? CustomColor.cpurple, width: 1.5),
-                                borderRadius: splashBorderRadius)
+                                border: Border.all(
+                                    color: buttonColor ?? ButtonTheme.of(context).colorScheme!.primary, width: 1.5),
+                                borderRadius: borderRadius)
                             : const BoxDecoration(),
-                        child: Center(
-                            child: Text(
-                          leftButtonText,
-                          style: switchButtonDecoration ? rightButtonTextStyle : leftButtonTextStyle,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        )),
+                        child: leftButtonloader!
+                            ? Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    height: 20,
+                                    width: 20,
+                                    child: Center(
+                                      child: loadingIndicator ??
+                                          CircularProgressIndicator(
+                                              color: switchButtonDecoration
+                                                  ? ButtonTheme.of(context).colorScheme!.primary
+                                                  : CustomColor.cwhite,
+                                              strokeWidth: 4),
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Center(
+                                child: Text(
+                                leftButtonText,
+                                style: switchButtonDecoration ? rightTextStyle : leftButtonTextStyle,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              )),
                       ),
                     ),
                   ),
@@ -176,7 +216,9 @@ class CustomTwoButtons extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 4.0),
                         child: Material(
-                          color: switchButtonDecoration ? buttonColor : Colors.transparent,
+                          color: switchButtonDecoration
+                              ? buttonColor ?? ButtonTheme.of(context).colorScheme!.primary
+                              : Colors.transparent,
                           borderRadius: borderRadius,
                           child: InkWell(
                             borderRadius: splashBorderRadius,
@@ -185,16 +227,35 @@ class CustomTwoButtons extends StatelessWidget {
                               decoration: switchButtonDecoration
                                   ? const BoxDecoration()
                                   : BoxDecoration(
-                                      border: Border.all(color: buttonColor ?? CustomColor.cpurple, width: 1),
-                                      borderRadius: splashBorderRadius),
+                                      border: Border.all(
+                                          color: buttonColor ?? ButtonTheme.of(context).colorScheme!.primary, width: 1),
+                                      borderRadius: borderRadius),
                               height: buttonHeight,
-                              child: Center(
-                                  child: Text(
-                                rightButtonText!,
-                                style: switchButtonDecoration ? leftButtonTextStyle : rightButtonTextStyle,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                              )),
+                              child: rightButtonloader!
+                                  ? Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        SizedBox(
+                                          height: 20,
+                                          width: 20,
+                                          child: Center(
+                                            child: loadingIndicator ??
+                                                CircularProgressIndicator(
+                                                    color: switchButtonDecoration
+                                                        ? CustomColor.cwhite
+                                                        : ButtonTheme.of(context).colorScheme!.primary,
+                                                    strokeWidth: 4),
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  : Center(
+                                      child: Text(
+                                      rightButtonText!,
+                                      style: switchButtonDecoration ? leftButtonTextStyle : rightTextStyle,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    )),
                             ),
                           ),
                         ),

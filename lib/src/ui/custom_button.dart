@@ -68,7 +68,7 @@ class CustomButton extends StatelessWidget {
   const CustomButton({
     Key? key,
     required this.title,
-    this.buttonColor = CustomColor.cpurple,
+    this.buttonColor,
     this.onPressed,
     this.textStyle = const TextStyle(color: CustomColor.cwhite),
     this.buttonHeight = 48.0,
@@ -87,7 +87,7 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       elevation: elevation,
-      color: buttonColor,
+      color: buttonColor ?? ButtonTheme.of(context).colorScheme!.primary,
       borderRadius: borderRadius,
       shadowColor: shadowColor,
       child: InkWell(

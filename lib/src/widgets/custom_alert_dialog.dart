@@ -1,6 +1,6 @@
 part of custom_widgets;
 
-class CustomAlertDialog extends StatelessWidget {
+class CdtsAlertDialog extends StatelessWidget {
   //Alert dialog content
   final Widget? title;
 
@@ -20,7 +20,7 @@ class CustomAlertDialog extends StatelessWidget {
   final bool scrollable;
 
   /// {@template flutter.material.dialog.backgroundColor}
-  /// The background color of the surface of this [CustomAlertDialog].
+  /// The background color of the surface of this [CdtsAlertDialog].
   ///
   /// This sets the [Material.color] on this [Dialog]'s [Material].
   ///
@@ -90,7 +90,16 @@ class CustomAlertDialog extends StatelessWidget {
   /// Defaults to [Axis.horizontal]
   final Axis? buttonDirection;
 
-  const CustomAlertDialog({
+  /// [bool] value which toggles in order to show the loading state when the right button is pressed
+  final bool? rightButtonloader;
+
+  /// [bool] value which toggles in order to show the loading state when the left button is pressed
+  final bool? leftButtonloader;
+
+  /// The [Widget] that loads when the [loader] is set to true when the button is pressed
+  final Widget? loadingIndicator;
+
+  const CdtsAlertDialog({
     Key? key,
     this.title,
     this.titlePadding,
@@ -112,6 +121,9 @@ class CustomAlertDialog extends StatelessWidget {
     this.borderRadius,
     this.splashBorderRadius,
     this.buttonDirection = Axis.horizontal,
+    this.rightButtonloader = false,
+    this.leftButtonloader = false,
+    this.loadingIndicator,
   }) : super(key: key);
 
   @override
@@ -181,6 +193,8 @@ class CustomAlertDialog extends StatelessWidget {
           elevation: buttonElevation,
           borderRadius: borderRadius,
           splashBorderRadius: splashBorderRadius,
+          leftButtonloader: leftButtonloader,
+          rightButtonloader: rightButtonloader,
         ),
         const SizedBox(height: 4),
       ];
@@ -203,6 +217,8 @@ class CustomAlertDialog extends StatelessWidget {
             elevation: buttonElevation,
             borderRadius: borderRadius,
             splashBorderRadius: splashBorderRadius,
+            leftButtonloader: leftButtonloader,
+            rightButtonloader: rightButtonloader,
           ),
         ),
         const SizedBox(height: 4),

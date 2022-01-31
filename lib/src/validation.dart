@@ -36,10 +36,19 @@ String? validateField(
     return "$fieldName cannot be empty";
   } else if (!(value.length >= minCharater) && value.isNotEmpty) {
     return "$fieldName should contains alteast $minCharater character";
-  } else if (maxCharacter != null && value.length >= maxCharacter) {
+  } else if (maxCharacter != null && value.length > maxCharacter) {
     return "$fieldName has exceeded $maxCharacter characters";
   }
   return null;
+}
+
+String? validateOtp(
+    {required BuildContext context, String? value, required String fieldName, int minCharater = 4, int? maxCharacter}) {
+  if (value!.isEmpty) {
+    return "$fieldName cannot be empty";
+  } else if (value.length < minCharater) {
+    return "Please enter the correct OTP";
+  }
 }
 
 String getInitialsFromString(String name) {
