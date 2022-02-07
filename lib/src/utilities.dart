@@ -75,12 +75,12 @@ class Utilities {
     );
   }
 
-  static replaceNamedActivity(context, routeName) {
-    Navigator.pushReplacementNamed(context, routeName);
+  static replaceNamedActivity(context, routeName, {Object? arguments}) {
+    Navigator.pushReplacementNamed(context, routeName, arguments: arguments);
   }
 
-  static openNamedActivity(context, routeName) {
-    Navigator.pushNamed(context, routeName);
+  static openNamedActivity(context, routeName, {Object? arguments}) {
+    Navigator.pushNamed(context, routeName, arguments: arguments);
   }
 
   static void removeStackActivity(context, object) {
