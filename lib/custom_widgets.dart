@@ -23,6 +23,7 @@ part 'src/ui/custom_simple_circular_loader.dart';
 part 'src/widgets/custom_scroll_loading.dart';
 part 'src/validation.dart';
 part 'src/widgets/text_field_widget.dart';
+part 'src/widgets/custom_text_field.dart';
 part 'src/ui/custom_text_border.dart';
 part 'src/widgets/custom_read_more.dart';
 part 'src/widgets/custom_shimmer.dart';
