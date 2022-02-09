@@ -87,6 +87,10 @@ class Utilities {
     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => object), (r) => false);
   }
 
+  static void removeNamedStackActivity(context, routeName, {Object? arguments}) {
+    Navigator.of(context).pushNamedAndRemoveUntil(routeName, (Route<dynamic> route) => false, arguments: arguments);
+  }
+
   static void closeActivity(context) {
     Navigator.pop(context);
   }
