@@ -75,12 +75,12 @@ class Utilities {
     );
   }
 
-  static replaceNamedActivity(context, routeName, {Object? arguments}) {
-    Navigator.pushReplacementNamed(context, routeName, arguments: arguments);
+  static Future<dynamic> replaceNamedActivity(context, routeName, {Object? arguments}) async {
+    return await Navigator.pushReplacementNamed(context, routeName, arguments: arguments);
   }
 
-  static openNamedActivity(context, routeName, {Object? arguments}) {
-    Navigator.pushNamed(context, routeName, arguments: arguments);
+  static Future<dynamic> openNamedActivity(context, routeName, {Object? arguments}) async {
+    return await Navigator.pushNamed(context, routeName, arguments: arguments);
   }
 
   static void removeStackActivity(context, object) {
