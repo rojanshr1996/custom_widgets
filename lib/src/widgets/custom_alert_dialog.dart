@@ -1,6 +1,6 @@
 part of custom_widgets;
 
-class CdtsAlertDialog extends StatelessWidget {
+class CustomAlertDialog extends StatelessWidget {
   //Alert dialog content
   final Widget? title;
 
@@ -20,7 +20,7 @@ class CdtsAlertDialog extends StatelessWidget {
   final bool scrollable;
 
   /// {@template flutter.material.dialog.backgroundColor}
-  /// The background color of the surface of this [CdtsAlertDialog].
+  /// The background color of the surface of this [CustomAlertDialog].
   ///
   /// This sets the [Material.color] on this [Dialog]'s [Material].
   ///
@@ -99,7 +99,7 @@ class CdtsAlertDialog extends StatelessWidget {
   /// The [Widget] that loads when the [loader] is set to true when the button is pressed
   final Widget? loadingIndicator;
 
-  const CdtsAlertDialog({
+  const CustomAlertDialog({
     Key? key,
     this.title,
     this.titlePadding,
