@@ -88,7 +88,7 @@ class CustomTextField extends StatelessWidget {
         label: label,
         fillColor: fillColor,
         filled: filled,
-        contentPadding: contentPadding ?? EdgeInsets.all(11.5.w),
+        contentPadding: contentPadding ?? EdgeInsets.all(11.w),
         suffixIcon: suffixIcon,
         prefixIcon: prefixIcon,
         hintText: hintText,
