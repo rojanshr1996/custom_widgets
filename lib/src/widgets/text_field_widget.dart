@@ -73,11 +73,11 @@ class TextFieldWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        SizedBox(height: headingField ? 14 : 0),
+        SizedBox(height: headingField ? 13.5.w : 0),
         headingField
             ? Text(
                 title ?? "",
-                style: TextStyle(fontSize: 14, color: headerColor),
+                style: TextStyle(fontSize: 13.5.w, color: headerColor),
               )
             : Container(),
         TextFormField(
