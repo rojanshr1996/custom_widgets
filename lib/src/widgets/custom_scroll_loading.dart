@@ -21,6 +21,8 @@ class CustomScrollLoading extends StatefulWidget {
   /// Prevented update nested listview with other axis direction
   final Axis scrollDirection;
 
+  final bool switchScroll;
+
   /// Loading indicator when [child] reaches the end of the list
   final Widget loadingIndicator;
 
@@ -30,6 +32,7 @@ class CustomScrollLoading extends StatefulWidget {
     required this.onEndOfPage,
     this.scrollOffset = 150,
     this.isLoading = false,
+    this.switchScroll = false,
     this.scrollDirection = Axis.vertical,
     this.loadingIndicator = const CircularProgressIndicator(),
   }) : super(key: key);
@@ -65,19 +68,36 @@ class _CustomScrollLoadingState extends State<CustomScrollLoading> {
   bool _onNotification(ScrollNotification notification, BuildContext context) {
     if (widget.scrollDirection == notification.metrics.axis) {
       if (notification is ScrollUpdateNotification) {
-        if (notification.metrics.maxScrollExtent > notification.metrics.pixels &&
-            notification.metrics.maxScrollExtent - notification.metrics.pixels <= widget.scrollOffset) {
-          if (notification.metrics.axisDirection == AxisDirection.down) {
-            _loadMore();
+        if (widget.switchScroll) {
+          if (notification.metrics.maxScrollExtent < notification.metrics.pixels &&
+              notification.metrics.maxScrollExtent - notification.metrics.pixels >= widget.scrollOffset) {
+            if (notification.metrics.axisDirection == AxisDirection.up) {
+              _loadMore();
+            }
+          }
+        } else {
+          if (notification.metrics.maxScrollExtent > notification.metrics.pixels &&
+              notification.metrics.maxScrollExtent - notification.metrics.pixels <= widget.scrollOffset) {
+            if (notification.metrics.axisDirection == AxisDirection.down) {
+              _loadMore();
+            }
           }
         }
+
         return true;
       }
 
       if (notification is OverscrollNotification) {
-        if (notification.overscroll > 0) {
-          _loadMore();
+        if (widget.switchScroll) {
+          if (notification.overscroll < 0) {
+            _loadMore();
+          }
+        } else {
+          if (notification.overscroll > 0) {
+            _loadMore();
+          }
         }
+
         return true;
       }
     }
