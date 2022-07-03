@@ -125,7 +125,7 @@ class CustomTwoButtons extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: rightButtonText == null ? 0 : 10),
+              SizedBox(height: rightButtonText == null ? 0 : 10.w),
               rightButtonText == null
                   ? Container()
                   : Material(
@@ -162,7 +162,7 @@ class CustomTwoButtons extends StatelessWidget {
             children: <Widget>[
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.only(right: 4.0),
+                  padding: EdgeInsets.only(right: 4.w),
                   child: Material(
                     elevation: elevation,
                     color: switchButtonDecoration
@@ -185,8 +185,8 @@ class CustomTwoButtons extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   SizedBox(
-                                    height: 20,
-                                    width: 20,
+                                    height: 19.5.w,
+                                    width: 19.5.w,
                                     child: Center(
                                       child: loadingIndicator ??
                                           CircularProgressIndicator(

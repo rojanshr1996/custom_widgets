@@ -29,6 +29,7 @@ class CustomTextField extends StatelessWidget {
   final TextStyle? errorStyle;
   final TextCapitalization textCapitalization;
   final Widget? label;
+  final AutovalidateMode? autovalidateMode;
 
   const CustomTextField({
     Key? key,
@@ -44,7 +45,7 @@ class CustomTextField extends StatelessWidget {
     this.enabled = true,
     this.autofocus = false,
     this.onTap,
-    this.contentPadding = const EdgeInsets.all(12),
+    this.contentPadding,
     this.enabledBorder,
     this.disabledBorder,
     this.focusedBorder,
@@ -60,12 +61,14 @@ class CustomTextField extends StatelessWidget {
     this.textCapitalization = TextCapitalization.none,
     this.errorStyle = const TextStyle(color: CustomColor.cred),
     this.label,
+    this.autovalidateMode,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       enabled: enabled,
+      autovalidateMode: autovalidateMode,
       maxLength: maxLength,
       onChanged: onChanged,
       obscureText: obscureText,
@@ -85,7 +88,7 @@ class CustomTextField extends StatelessWidget {
         label: label,
         fillColor: fillColor,
         filled: filled,
-        contentPadding: contentPadding,
+        contentPadding: contentPadding ?? EdgeInsets.all(11.w),
         suffixIcon: suffixIcon,
         prefixIcon: prefixIcon,
         hintText: hintText,

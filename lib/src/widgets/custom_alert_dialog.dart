@@ -114,7 +114,7 @@ class CustomAlertDialog extends StatelessWidget {
     this.buttonColor = CustomColor.cpurple,
     this.rightButtonTextStyle = const TextStyle(color: CustomColor.cpurple),
     this.leftButtonTextStyle = const TextStyle(color: CustomColor.cwhite),
-    this.buttonHeight = 48.0,
+    this.buttonHeight,
     this.switchButtonDecoration = false,
     this.backgroundColor,
     this.buttonElevation = 0.0,
@@ -134,7 +134,7 @@ class CustomAlertDialog extends StatelessWidget {
     Widget? contentWidget;
 
     if (title != null) {
-      final EdgeInsets defaultTitlePadding = EdgeInsets.fromLTRB(18.0, 18.0, 18.0, body == null ? 8.0 : 0.0);
+      final EdgeInsets defaultTitlePadding = EdgeInsets.fromLTRB(17.5.w, 17.5.w, 17.5.w, body == null ? 7.5.w : 0.0);
       final EdgeInsets effectiveTitlePadding = titlePadding?.resolve(textDirection) ?? defaultTitlePadding;
       titleWidget = Padding(
         padding: EdgeInsets.only(
@@ -188,7 +188,7 @@ class CustomAlertDialog extends StatelessWidget {
           leftButtonTextStyle: leftButtonTextStyle,
           rightButtonTextStyle: rightButtonTextStyle,
           buttonColor: buttonColor,
-          buttonHeight: buttonHeight,
+          buttonHeight: buttonHeight ?? 47.5.w,
           switchButtonDecoration: switchButtonDecoration,
           elevation: buttonElevation,
           borderRadius: borderRadius,
@@ -196,7 +196,7 @@ class CustomAlertDialog extends StatelessWidget {
           leftButtonloader: leftButtonloader,
           rightButtonloader: rightButtonloader,
         ),
-        const SizedBox(height: 4),
+        SizedBox(height: 4.w),
       ];
     } else {
       columnChildren = <Widget>[
@@ -212,7 +212,7 @@ class CustomAlertDialog extends StatelessWidget {
             leftButtonTextStyle: leftButtonTextStyle,
             rightButtonTextStyle: rightButtonTextStyle,
             buttonColor: buttonColor,
-            buttonHeight: buttonHeight,
+            buttonHeight: buttonHeight ?? 47.5.w,
             switchButtonDecoration: switchButtonDecoration,
             elevation: buttonElevation,
             borderRadius: borderRadius,
@@ -221,7 +221,7 @@ class CustomAlertDialog extends StatelessWidget {
             rightButtonloader: rightButtonloader,
           ),
         ),
-        const SizedBox(height: 4),
+        SizedBox(height: 4.w),
       ];
     }
 
@@ -236,9 +236,9 @@ class CustomAlertDialog extends StatelessWidget {
     return Dialog(
       backgroundColor: backgroundColor,
       elevation: 3,
-      insetPadding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
+      insetPadding: EdgeInsets.symmetric(horizontal: 38.5.w, vertical: 23.5.w),
       clipBehavior: Clip.none,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.r)),
       child: dialogChild,
     );
   }

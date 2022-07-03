@@ -26,7 +26,7 @@ class CustomSimpleCircularLoader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: padding ?? const EdgeInsets.all(4.0),
+      padding: padding ?? EdgeInsets.all(4.w),
       child: SizedBox(
         height: buttonSize,
         width: buttonSize,

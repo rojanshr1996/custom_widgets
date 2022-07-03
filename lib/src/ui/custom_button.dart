@@ -71,7 +71,7 @@ class CustomButton extends StatelessWidget {
     this.buttonColor,
     this.onPressed,
     this.textStyle = const TextStyle(color: CustomColor.cwhite),
-    this.buttonHeight = 48.0,
+    this.buttonHeight,
     this.borderRadius,
     this.prefixIcon,
     this.splashBorderRadius,
@@ -96,14 +96,14 @@ class CustomButton extends StatelessWidget {
         onTap: onPressed,
         child: SizedBox(
           width: buttonWidth ?? Utilities.screenWidth(context),
-          height: buttonHeight,
+          height: buttonHeight ?? 47.5.w,
           child: loader!
               ? Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
-                      height: 20,
-                      width: 20,
+                      height: 19.5.w,
+                      width: 19.5.w,
                       child: Center(
                         child: loadingIndicator ??
                             const CircularProgressIndicator(color: CustomColor.cwhite, strokeWidth: 4),
@@ -117,7 +117,7 @@ class CustomButton extends StatelessWidget {
                     prefixIcon == null
                         ? const SizedBox()
                         : Padding(
-                            padding: const EdgeInsets.only(right: 12, left: 12),
+                            padding: EdgeInsets.only(right: 11.5.w, left: 11.5.w),
                             child: prefixIcon,
                           ),
                     Expanded(
@@ -131,7 +131,7 @@ class CustomButton extends StatelessWidget {
                     suffixIcon == null
                         ? const SizedBox()
                         : Padding(
-                            padding: const EdgeInsets.only(right: 12, left: 12),
+                            padding: EdgeInsets.only(right: 11.5.w, left: 11.5.w),
                             child: suffixIcon,
                           ),
                   ],
