@@ -13,8 +13,13 @@ String? validateEmail({required BuildContext context, required String value, Str
   return null;
 }
 
-String? validatePassword(
-    {required BuildContext context, required String value, bool validateLength = false, String? comparePassword = ""}) {
+String? validatePassword({
+  required BuildContext context,
+  required String value,
+  bool validateLength = false,
+  String? oldPassword = "",
+  String? comparePassword = "",
+}) {
   if (value.isEmpty) {
     return "Password cannot be empty";
   } else if (validateLength) {
@@ -22,6 +27,11 @@ String? validatePassword(
       return "Password should contains alteast 8 character";
     }
   } else if (comparePassword != "") {
+    if (oldPassword != "") {
+      if (oldPassword == comparePassword && oldPassword == value) {
+        return "You have entered the same password as old one";
+      }
+    }
     if (comparePassword! != value) {
       return "Password does not match";
     }
