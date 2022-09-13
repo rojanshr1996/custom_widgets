@@ -88,15 +88,15 @@ class Utilities {
   }
 
   static void removeNamedStackActivity(context, routeName, {Object? arguments}) {
-    Navigator?.of(context).pushNamedAndRemoveUntil(routeName, (Route<dynamic> route) => false, arguments: arguments);
+    Navigator.of(context).pushNamedAndRemoveUntil(routeName, (Route<dynamic> route) => false, arguments: arguments);
   }
 
   static void closeActivity(context) {
-    Navigator?.pop(context);
+    Navigator.pop(context);
   }
 
   static void returnDataCloseActivity(context, object) {
-    Navigator?.pop(context, object);
+    Navigator.pop(context, object);
   }
 
   static String encodeJson(dynamic jsonData) {
