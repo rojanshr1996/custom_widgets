@@ -32,7 +32,6 @@ class CustomTextField extends StatelessWidget {
   final AutovalidateMode? autovalidateMode;
   final bool? showCursor;
 
-
   const CustomTextField({
     Key? key,
     this.textEditingController,
@@ -70,7 +69,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      showCursor:showCursor,
+      showCursor: showCursor,
       enabled: enabled,
       autovalidateMode: autovalidateMode,
       maxLength: maxLength,
