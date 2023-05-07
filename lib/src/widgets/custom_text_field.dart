@@ -30,6 +30,8 @@ class CustomTextField extends StatelessWidget {
   final TextCapitalization textCapitalization;
   final Widget? label;
   final AutovalidateMode? autovalidateMode;
+  final bool? showCursor;
+
 
   const CustomTextField({
     Key? key,
@@ -62,11 +64,13 @@ class CustomTextField extends StatelessWidget {
     this.errorStyle = const TextStyle(color: CustomColor.cred),
     this.label,
     this.autovalidateMode,
+    this.showCursor,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      showCursor:showCursor,
       enabled: enabled,
       autovalidateMode: autovalidateMode,
       maxLength: maxLength,
