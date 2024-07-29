@@ -1,4 +1,4 @@
-part of custom_widgets;
+part of '../custom_widgets.dart';
 
 class Utilities {
   static doubleBack(BuildContext context) {
@@ -31,7 +31,8 @@ class Utilities {
     return MediaQuery.of(context).orientation;
   }
 
-  static getSnackBar({required BuildContext context, required SnackBar snackBar}) {
+  static getSnackBar(
+      {required BuildContext context, required SnackBar snackBar}) {
     return ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
@@ -75,20 +76,27 @@ class Utilities {
     );
   }
 
-  static Future<dynamic> replaceNamedActivity(context, routeName, {Object? arguments}) async {
-    return await Navigator.pushReplacementNamed(context, routeName, arguments: arguments);
+  static Future<dynamic> replaceNamedActivity(context, routeName,
+      {Object? arguments}) async {
+    return await Navigator.pushReplacementNamed(context, routeName,
+        arguments: arguments);
   }
 
-  static Future<dynamic> openNamedActivity(context, routeName, {Object? arguments}) async {
+  static Future<dynamic> openNamedActivity(context, routeName,
+      {Object? arguments}) async {
     return await Navigator.pushNamed(context, routeName, arguments: arguments);
   }
 
   static void removeStackActivity(context, object) {
-    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => object), (r) => false);
+    Navigator.pushAndRemoveUntil(
+        context, MaterialPageRoute(builder: (context) => object), (r) => false);
   }
 
-  static void removeNamedStackActivity(context, routeName, {Object? arguments}) {
-    Navigator.of(context).pushNamedAndRemoveUntil(routeName, (Route<dynamic> route) => false, arguments: arguments);
+  static void removeNamedStackActivity(context, routeName,
+      {Object? arguments}) {
+    Navigator.of(context).pushNamedAndRemoveUntil(
+        routeName, (Route<dynamic> route) => false,
+        arguments: arguments);
   }
 
   static void closeActivity(context) {
@@ -109,14 +117,16 @@ class Utilities {
 
   static String shortString(String str, [int length = 50]) {
     if (str.length > length) {
-      return str.substring(0, length) + "...";
+      return "${str.substring(0, length)}...";
     } else {
       return str;
     }
   }
 
-  static Widget myImage({required String imageUrl, double? width, double? height, fit}) {
-    return Image.network(imageUrl, width: width, height: height, fit: fit ?? BoxFit.cover);
+  static Widget myImage(
+      {required String imageUrl, double? width, double? height, fit}) {
+    return Image.network(imageUrl,
+        width: width, height: height, fit: fit ?? BoxFit.cover);
   }
 
   static bool isIOS() {
@@ -127,7 +137,8 @@ class Utilities {
     return (MediaQuery.of(context).viewInsets.bottom == 0.0);
   }
 
-  static fieldFocusChange(BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
+  static fieldFocusChange(
+      BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
     currentFocus.unfocus();
     FocusScope.of(context).requestFocus(nextFocus);
   }

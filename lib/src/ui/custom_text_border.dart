@@ -1,4 +1,4 @@
-part of custom_widgets;
+part of '../../custom_widgets.dart';
 
 class CustomTextBorder extends StatelessWidget {
   final String text;
@@ -16,18 +16,23 @@ class CustomTextBorder extends StatelessWidget {
   /// Defaults to 0.5.
   final double strokeWidth;
   const CustomTextBorder({
-    Key? key,
+    super.key,
     required this.text,
     this.textBorderColor = CustomColor.dark,
     this.strokeWidth = 0.5,
-    this.textStyle = const TextStyle(color: CustomColor.cwhite, fontWeight: FontWeight.w500),
-  }) : super(key: key);
+    this.textStyle =
+        const TextStyle(color: CustomColor.cWhite, fontWeight: FontWeight.w500),
+  });
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Text(text, style: textStyle, maxLines: 3, overflow: TextOverflow.ellipsis, softWrap: true),
+        Text(text,
+            style: textStyle,
+            maxLines: 3,
+            overflow: TextOverflow.ellipsis,
+            softWrap: true),
         Text(text,
             style: textStyle?.copyWith(
               foreground: Paint()

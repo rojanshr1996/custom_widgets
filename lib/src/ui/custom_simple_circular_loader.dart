@@ -1,4 +1,4 @@
-part of custom_widgets;
+part of '../../custom_widgets.dart';
 
 class CustomSimpleCircularLoader extends StatelessWidget {
   /// Species the color of the circular loader
@@ -16,13 +16,12 @@ class CustomSimpleCircularLoader extends StatelessWidget {
   final double? buttonSize;
 
   const CustomSimpleCircularLoader(
-      {Key? key,
-      this.color = CustomColor.cpurple,
+      {super.key,
+      this.color = CustomColor.cPurple,
       this.strokeWidth = 6.0,
       this.padding,
       this.backgroundColor,
-      this.buttonSize})
-      : super(key: key);
+      this.buttonSize});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -30,7 +29,10 @@ class CustomSimpleCircularLoader extends StatelessWidget {
       child: SizedBox(
         height: buttonSize,
         width: buttonSize,
-        child: CircularProgressIndicator(color: color, strokeWidth: strokeWidth, backgroundColor: backgroundColor),
+        child: CircularProgressIndicator(
+            color: color,
+            strokeWidth: strokeWidth,
+            backgroundColor: backgroundColor),
       ),
     );
   }

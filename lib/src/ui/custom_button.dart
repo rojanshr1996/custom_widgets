@@ -1,4 +1,4 @@
-part of custom_widgets;
+part of '../../custom_widgets.dart';
 
 class CustomButton extends StatelessWidget {
   /// Used for the name of the button
@@ -66,11 +66,11 @@ class CustomButton extends StatelessWidget {
   final double elevation;
 
   const CustomButton({
-    Key? key,
+    super.key,
     required this.title,
     this.buttonColor,
     this.onPressed,
-    this.textStyle = const TextStyle(color: CustomColor.cwhite),
+    this.textStyle = const TextStyle(color: CustomColor.cWhite),
     this.buttonHeight,
     this.borderRadius,
     this.prefixIcon,
@@ -81,7 +81,7 @@ class CustomButton extends StatelessWidget {
     this.loadingIndicator,
     this.elevation = 2.0,
     this.shadowColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +106,8 @@ class CustomButton extends StatelessWidget {
                       width: 19.5.w,
                       child: Center(
                         child: loadingIndicator ??
-                            const CircularProgressIndicator(color: CustomColor.cwhite, strokeWidth: 4),
+                            const CircularProgressIndicator(
+                                color: CustomColor.cWhite, strokeWidth: 4),
                       ),
                     ),
                   ],
@@ -117,7 +118,8 @@ class CustomButton extends StatelessWidget {
                     prefixIcon == null
                         ? const SizedBox()
                         : Padding(
-                            padding: EdgeInsets.only(right: 11.5.w, left: 11.5.w),
+                            padding:
+                                EdgeInsets.only(right: 11.5.w, left: 11.5.w),
                             child: prefixIcon,
                           ),
                     Expanded(
@@ -131,7 +133,8 @@ class CustomButton extends StatelessWidget {
                     suffixIcon == null
                         ? const SizedBox()
                         : Padding(
-                            padding: EdgeInsets.only(right: 11.5.w, left: 11.5.w),
+                            padding:
+                                EdgeInsets.only(right: 11.5.w, left: 11.5.w),
                             child: suffixIcon,
                           ),
                   ],

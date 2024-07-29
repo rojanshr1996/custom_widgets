@@ -1,11 +1,15 @@
-part of custom_widgets;
+part of '../custom_widgets.dart';
 
-String? validateEmail({required BuildContext context, required String value, String fieldName = "Email"}) {
+String? validateEmail(
+    {required BuildContext context,
+    required String value,
+    String fieldName = "Email"}) {
   value = value.trim();
   if (value.isEmpty) {
     return "$fieldName cannot be empty";
   }
-  String regExpression = r"^(?=^.{6,255}$)([0-9a-zA-Z]+[-._+&amp;])*[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,85}$";
+  String regExpression =
+      r"^(?=^.{6,255}$)([0-9a-zA-Z]+[-._+&amp;])*[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,85}$";
   RegExp regExp = RegExp(regExpression);
   if (!regExp.hasMatch(value)) {
     return "Enter a valid email";
@@ -24,7 +28,7 @@ String? validatePassword({
     return "Password cannot be empty";
   } else if (validateLength) {
     if (!(value.length >= 8) && value.isNotEmpty) {
-      return "Password should contains alteast 8 character";
+      return "Password should contains at least 8 character";
     }
   } else if (comparePassword != "") {
     if (oldPassword != "") {
@@ -41,11 +45,15 @@ String? validatePassword({
 }
 
 String? validateField(
-    {required BuildContext context, String? value, required String fieldName, int minCharater = 0, int? maxCharacter}) {
+    {required BuildContext context,
+    String? value,
+    required String fieldName,
+    int minCharacter = 0,
+    int? maxCharacter}) {
   if (value!.isEmpty) {
     return "$fieldName cannot be empty";
-  } else if (!(value.length >= minCharater) && value.isNotEmpty) {
-    return "$fieldName should contains alteast $minCharater character";
+  } else if (!(value.length >= minCharacter) && value.isNotEmpty) {
+    return "$fieldName should contains at least $minCharacter character";
   } else if (maxCharacter != null && value.length > maxCharacter) {
     return "$fieldName has exceeded $maxCharacter characters";
   }
@@ -53,12 +61,17 @@ String? validateField(
 }
 
 String? validateOtp(
-    {required BuildContext context, String? value, required String fieldName, int minCharater = 4, int? maxCharacter}) {
+    {required BuildContext context,
+    String? value,
+    required String fieldName,
+    int minCharacter = 4,
+    int? maxCharacter}) {
   if (value!.isEmpty) {
     return "$fieldName cannot be empty";
-  } else if (value.length < minCharater) {
+  } else if (value.length < minCharacter) {
     return "Please enter the correct OTP";
   }
+  return null;
 }
 
 String getInitialsFromString(String name) {
@@ -76,7 +89,9 @@ String getInitialsFromString(String name) {
 }
 
 List<TextSpan> highlightTextOccurrences(
-    {required String source, required String query, Color textColor = Colors.black}) {
+    {required String source,
+    required String query,
+    Color textColor = Colors.black}) {
   if (query.isEmpty || !source.toLowerCase().contains(query.toLowerCase())) {
     return [TextSpan(text: source)];
   }
@@ -115,7 +130,8 @@ getUuidIdentifier() {
 }
 
 Future<List<dynamic>> loadCountryCode() async {
-  String jsonStringValues = await rootBundle.loadString('lib/src/assets/country_code.json');
+  String jsonStringValues =
+      await rootBundle.loadString('lib/src/assets/country_code.json');
   List<dynamic> countryList = json.decode(jsonStringValues);
   return countryList;
 }

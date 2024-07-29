@@ -1,4 +1,4 @@
-part of custom_widgets;
+part of '../../custom_widgets.dart';
 
 class CustomAlphabetScrollIndex extends StatefulWidget {
   /// items list of [AlphaModel] type in order to get the alphabets index list
@@ -37,18 +37,18 @@ class CustomAlphabetScrollIndex extends StatefulWidget {
   final ScrollController? scrollController;
 
   const CustomAlphabetScrollIndex(
-      {Key? key,
+      {super.key,
       required this.items,
       required this.itemHeight,
       required this.itemBuilder,
       required this.selectedCharColor,
       required this.backgroundColor,
       required this.charColor,
-      this.scrollController})
-      : super(key: key);
+      this.scrollController});
 
   @override
-  _CustomAlphabetScrollIndexState createState() => _CustomAlphabetScrollIndexState();
+  _CustomAlphabetScrollIndexState createState() =>
+      _CustomAlphabetScrollIndexState();
 }
 
 class _CustomAlphabetScrollIndexState extends State<CustomAlphabetScrollIndex> {
@@ -57,7 +57,7 @@ class _CustomAlphabetScrollIndexState extends State<CustomAlphabetScrollIndex> {
   String currentChar = "";
   String selectedChar = "";
   bool _visible = false;
-  bool alphabatColorChange = false;
+  bool alphabetColorChange = false;
 
   @override
   void initState() {
@@ -87,7 +87,9 @@ class _CustomAlphabetScrollIndexState extends State<CustomAlphabetScrollIndex> {
         decoration: BoxDecoration(color: widget.backgroundColor),
         child: Center(
           child: Padding(
-            padding: EdgeInsets.only(top: alphabet == "A" ? 4.0 : 0, bottom: alphabet == "Z" ? 4 : 0),
+            padding: EdgeInsets.only(
+                top: alphabet == "A" ? 4.0 : 0,
+                bottom: alphabet == "Z" ? 4 : 0),
             child: Text(
               alphabet,
               textAlign: TextAlign.end,
@@ -95,7 +97,7 @@ class _CustomAlphabetScrollIndexState extends State<CustomAlphabetScrollIndex> {
                 fontSize: 12,
                 fontWeight: FontWeight.w500,
                 color: selectedChar == alphabet
-                    ? alphabatColorChange
+                    ? alphabetColorChange
                         ? widget.selectedCharColor
                         : widget.charColor
                     : widget.charColor,
@@ -108,7 +110,8 @@ class _CustomAlphabetScrollIndexState extends State<CustomAlphabetScrollIndex> {
   }
 
   int _getAlphabetIndexFromDy(double dy, List<String> alphabets) {
-    final alphabetContainer = alphabetContainerKey.currentContext?.findRenderObject() as RenderBox;
+    final alphabetContainer =
+        alphabetContainerKey.currentContext?.findRenderObject() as RenderBox;
     final alphabetContainerHeight = alphabetContainer.size.height;
     final oneItemHeight = alphabetContainerHeight / alphabets.length;
     final index = (dy / oneItemHeight).floor();
@@ -139,31 +142,35 @@ class _CustomAlphabetScrollIndexState extends State<CustomAlphabetScrollIndex> {
       }
       setState(() {
         currentChar = char;
-        alphabatColorChange = true;
+        alphabetColorChange = true;
         _visible = true;
       });
 
-      _scrollController.animateTo(dyToGo, duration: const Duration(milliseconds: 400), curve: Curves.linear);
+      _scrollController.animateTo(dyToGo,
+          duration: const Duration(milliseconds: 400), curve: Curves.linear);
     } catch (e) {
       debugPrint(e.toString());
     }
   }
 
-  void _onVerticalDragStart(DragStartDetails details, List<String> alphabets, Map<String, int> alphabetDyPositions) {
+  void _onVerticalDragStart(DragStartDetails details, List<String> alphabets,
+      Map<String, int> alphabetDyPositions) {
     final index = _getAlphabetIndexFromDy(details.localPosition.dy, alphabets);
     final alphabet = alphabets[index];
     _scrollToItems(alphabet, alphabetDyPositions);
   }
 
-  void _onVerticalDragUpdate(DragUpdateDetails details, List<String> alphabets, Map<String, int> alphabetDyPositions) {
+  void _onVerticalDragUpdate(DragUpdateDetails details, List<String> alphabets,
+      Map<String, int> alphabetDyPositions) {
     final index = _getAlphabetIndexFromDy(details.localPosition.dy, alphabets);
     final alphabet = alphabets[index];
     selectedChar = currentChar;
     _scrollToItems(alphabet, alphabetDyPositions);
-    alphabatColorChange = true;
+    alphabetColorChange = true;
   }
 
-  void _onTapDown(TapDownDetails details, List<String> alphabets, Map<String, int> alphabetDyPositions) {
+  void _onTapDown(TapDownDetails details, List<String> alphabets,
+      Map<String, int> alphabetDyPositions) {
     final index = _getAlphabetIndexFromDy(details.localPosition.dy, alphabets);
     final alphabet = alphabets[index];
     setState(() {
@@ -173,13 +180,13 @@ class _CustomAlphabetScrollIndexState extends State<CustomAlphabetScrollIndex> {
 
     setState(() {
       _visible = true;
-      alphabatColorChange = true;
+      alphabetColorChange = true;
     });
 
     Future.delayed(const Duration(milliseconds: 800), () {
       setState(() {
         currentChar = "";
-        alphabatColorChange = false;
+        alphabetColorChange = false;
         _visible = false;
       });
     });
@@ -189,7 +196,7 @@ class _CustomAlphabetScrollIndexState extends State<CustomAlphabetScrollIndex> {
     Future.delayed(const Duration(milliseconds: 500), () {
       setState(() {
         currentChar = "";
-        alphabatColorChange = false;
+        alphabetColorChange = false;
         _visible = false;
       });
     });
@@ -215,11 +222,16 @@ class _CustomAlphabetScrollIndexState extends State<CustomAlphabetScrollIndex> {
 
   Widget _alphabeticalIndex(BuildContext context, List items) {
     items.map((e) {}).toList();
-    List<String> alphabets = getAlphabetsFromStringList(
-        items.map((item) => item.key == "" ? "Unknown" : item.key.toString().toUpperCase()).toList());
+    List<String> alphabets = getAlphabetsFromStringList(items
+        .map((item) =>
+            item.key == "" ? "Unknown" : item.key.toString().toUpperCase())
+        .toList());
 
     //get the list of names from the list of maps
-    items = items.map((item) => item.key == "" ? "Unknown" : item.key.toString().toUpperCase()).toList();
+    items = items
+        .map((item) =>
+            item.key == "" ? "Unknown" : item.key.toString().toUpperCase())
+        .toList();
     alphabets = [
       "A",
       "B",
@@ -253,18 +265,22 @@ class _CustomAlphabetScrollIndexState extends State<CustomAlphabetScrollIndex> {
 
     return LayoutBuilder(
       builder: (context, constraint) {
-        if (constraint.maxHeight < 350.0) return Container(); // alphabet list does not fit, might as well hide it
+        if (constraint.maxHeight < 350.0)
+          return Container(); // alphabet list does not fit, might as well hide it
         return Padding(
-          padding:
-              Platform.isIOS ? const EdgeInsets.only(top: 16, bottom: 32) : const EdgeInsets.only(top: 16, bottom: 32),
+          padding: Platform.isIOS
+              ? const EdgeInsets.only(top: 16, bottom: 32)
+              : const EdgeInsets.only(top: 16, bottom: 32),
           child: SizedBox(
             width: 25.0,
             key: alphabetContainerKey,
             child: GestureDetector(
               onVerticalDragUpdate: (DragUpdateDetails dragUpdateDetails) =>
-                  _onVerticalDragUpdate(dragUpdateDetails, alphabets, alphabetDyPositions),
+                  _onVerticalDragUpdate(
+                      dragUpdateDetails, alphabets, alphabetDyPositions),
               onVerticalDragStart: (DragStartDetails dragStartDetails) =>
-                  _onVerticalDragStart(dragStartDetails, alphabets, alphabetDyPositions),
+                  _onVerticalDragStart(
+                      dragStartDetails, alphabets, alphabetDyPositions),
               onVerticalDragEnd: _onVerticalDragEnd,
               onTapDown: (TapDownDetails dragStartDetails) => {
                 _onTapDown(dragStartDetails, alphabets, alphabetDyPositions),
@@ -298,7 +314,7 @@ class _CustomAlphabetScrollIndexState extends State<CustomAlphabetScrollIndex> {
                 width: 85,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: CustomColor.cpurple.withAlpha(170),
+                  color: CustomColor.cPurple.withAlpha(170),
                 ),
                 child: Center(
                   child: Text(

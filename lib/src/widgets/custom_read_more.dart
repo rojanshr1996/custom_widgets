@@ -1,4 +1,4 @@
-part of custom_widgets;
+part of '../../custom_widgets.dart';
 
 enum TrimMode { length, line }
 
@@ -25,7 +25,7 @@ class CustomReadMoreText extends StatefulWidget {
   final String? semanticsLabel;
 
   const CustomReadMoreText({
-    Key? key,
+    super.key,
     required this.data,
     this.trimExpandedText = ' read less',
     this.trimCollapsedText = ' ...read more',
@@ -39,7 +39,7 @@ class CustomReadMoreText extends StatefulWidget {
     this.locale,
     this.textScaleFactor = 1.0,
     this.semanticsLabel,
-  }) : super(key: key);
+  });
 
   @override
   CustomReadMoreTextState createState() => CustomReadMoreTextState();
@@ -66,11 +66,13 @@ class CustomReadMoreTextState extends State<CustomReadMoreText> {
 
     final textAlign = widget.textAlign ?? defaultTextStyle.textAlign;
     final textDirection = widget.textDirection ?? Directionality.of(context);
-    final textScaleFactor = widget.textScaleFactor ?? MediaQuery.textScaleFactorOf(context);
+    final textScaleFactor =
+        widget.textScaleFactor ?? MediaQuery.textScaleFactorOf(context);
     final overflow = defaultTextStyle.overflow;
     final locale = widget.locale ?? Localizations.localeOf(context);
 
-    final colorClickableText = widget.colorClickableText ?? Theme.of(context).colorScheme.secondary;
+    final colorClickableText =
+        widget.colorClickableText ?? Theme.of(context).colorScheme.secondary;
 
     TextSpan link = TextSpan(
       text: _readMore ? widget.trimCollapsedText : widget.trimExpandedText,
@@ -133,7 +135,9 @@ class CustomReadMoreTextState extends State<CustomReadMoreText> {
             if (widget.trimLength < widget.data.length) {
               textSpan = TextSpan(
                 style: effectiveTextStyle,
-                text: _readMore ? widget.data.substring(0, widget.trimLength) : widget.data,
+                text: _readMore
+                    ? widget.data.substring(0, widget.trimLength)
+                    : widget.data,
                 children: <TextSpan>[link],
               );
             } else {
@@ -148,7 +152,8 @@ class CustomReadMoreTextState extends State<CustomReadMoreText> {
               textSpan = TextSpan(
                 style: effectiveTextStyle,
                 text: _readMore
-                    ? widget.data.substring(0, endIndex) + (linkLongerThanLine ? _kLineSeparator : '')
+                    ? widget.data.substring(0, endIndex) +
+                        (linkLongerThanLine ? _kLineSeparator : '')
                     : widget.data,
                 children: <TextSpan>[link],
               );
@@ -160,7 +165,8 @@ class CustomReadMoreTextState extends State<CustomReadMoreText> {
             }
             break;
           default:
-            throw Exception('TrimMode type: ${widget.trimMode} is not supported');
+            throw Exception(
+                'TrimMode type: ${widget.trimMode} is not supported');
         }
 
         return RichText(
@@ -169,9 +175,7 @@ class CustomReadMoreTextState extends State<CustomReadMoreText> {
           softWrap: true,
           //softWrap,
           overflow: TextOverflow.clip,
-          //overflow,
-          textScaleFactor: textScaleFactor,
-          text: textSpan,
+          text: textSpan, textScaler: TextScaler.linear(textScaleFactor),
         );
       },
     );

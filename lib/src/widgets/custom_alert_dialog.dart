@@ -1,4 +1,4 @@
-part of custom_widgets;
+part of '../../custom_widgets.dart';
 
 class CustomAlertDialog extends StatelessWidget {
   //Alert dialog content
@@ -53,7 +53,7 @@ class CustomAlertDialog extends StatelessWidget {
   /// Describes how to format the left side button name text
   final TextStyle? leftButtonTextStyle;
 
-  /// [bool] value in order to toggle the decorations between the two bottons. Defaults to [false];
+  /// [bool] value in order to toggle the decorations between the two buttons. Defaults to [false];
   final bool switchButtonDecoration;
 
   /// Species the radii for each corner of the button
@@ -91,16 +91,16 @@ class CustomAlertDialog extends StatelessWidget {
   final Axis? buttonDirection;
 
   /// [bool] value which toggles in order to show the loading state when the right button is pressed
-  final bool? rightButtonloader;
+  final bool? rightButtonLoader;
 
   /// [bool] value which toggles in order to show the loading state when the left button is pressed
-  final bool? leftButtonloader;
+  final bool? leftButtonLoader;
 
   /// The [Widget] that loads when the [loader] is set to true when the button is pressed
   final Widget? loadingIndicator;
 
   const CustomAlertDialog({
-    Key? key,
+    super.key,
     this.title,
     this.titlePadding,
     this.body,
@@ -111,9 +111,9 @@ class CustomAlertDialog extends StatelessWidget {
     this.leftButtonFunction,
     this.rightButtonText,
     this.rightButtonFunction,
-    this.buttonColor = CustomColor.cpurple,
-    this.rightButtonTextStyle = const TextStyle(color: CustomColor.cpurple),
-    this.leftButtonTextStyle = const TextStyle(color: CustomColor.cwhite),
+    this.buttonColor = CustomColor.cPurple,
+    this.rightButtonTextStyle = const TextStyle(color: CustomColor.cPurple),
+    this.leftButtonTextStyle = const TextStyle(color: CustomColor.cWhite),
     this.buttonHeight,
     this.switchButtonDecoration = false,
     this.backgroundColor,
@@ -121,21 +121,24 @@ class CustomAlertDialog extends StatelessWidget {
     this.borderRadius,
     this.splashBorderRadius,
     this.buttonDirection = Axis.horizontal,
-    this.rightButtonloader = false,
-    this.leftButtonloader = false,
+    this.rightButtonLoader = false,
+    this.leftButtonLoader = false,
     this.loadingIndicator,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
-    final double paddingScaleFactor = _paddingScaleFactor(MediaQuery.of(context).textScaleFactor);
+    final double paddingScaleFactor =
+        _paddingScaleFactor(MediaQuery.of(context).textScaleFactor);
     final TextDirection textDirection = Directionality.of(context);
     Widget? titleWidget;
     Widget? contentWidget;
 
     if (title != null) {
-      final EdgeInsets defaultTitlePadding = EdgeInsets.fromLTRB(17.5.w, 17.5.w, 17.5.w, body == null ? 7.5.w : 0.0);
-      final EdgeInsets effectiveTitlePadding = titlePadding?.resolve(textDirection) ?? defaultTitlePadding;
+      final EdgeInsets defaultTitlePadding = EdgeInsets.fromLTRB(
+          17.5.w, 17.5.w, 17.5.w, body == null ? 7.5.w : 0.0);
+      final EdgeInsets effectiveTitlePadding =
+          titlePadding?.resolve(textDirection) ?? defaultTitlePadding;
       titleWidget = Padding(
         padding: EdgeInsets.only(
           left: effectiveTitlePadding.left * paddingScaleFactor,
@@ -144,20 +147,23 @@ class CustomAlertDialog extends StatelessWidget {
           bottom: effectiveTitlePadding.bottom,
         ),
         child: Semantics(
-          child: title,
           namesRoute: true,
           container: true,
+          child: title,
         ),
       );
     }
 
     if (body != null) {
-      final EdgeInsets effectiveContentPadding = contentPadding.resolve(textDirection);
+      final EdgeInsets effectiveContentPadding =
+          contentPadding.resolve(textDirection);
       contentWidget = Padding(
         padding: EdgeInsets.only(
           left: effectiveContentPadding.left * paddingScaleFactor,
           right: effectiveContentPadding.right * paddingScaleFactor,
-          top: title == null ? effectiveContentPadding.top * paddingScaleFactor : effectiveContentPadding.top,
+          top: title == null
+              ? effectiveContentPadding.top * paddingScaleFactor
+              : effectiveContentPadding.top,
           bottom: effectiveContentPadding.bottom,
         ),
         child: body,
@@ -193,8 +199,8 @@ class CustomAlertDialog extends StatelessWidget {
           elevation: buttonElevation,
           borderRadius: borderRadius,
           splashBorderRadius: splashBorderRadius,
-          leftButtonloader: leftButtonloader,
-          rightButtonloader: rightButtonloader,
+          leftButtonLoader: leftButtonLoader,
+          rightButtonLoader: rightButtonLoader,
         ),
         SizedBox(height: 4.w),
       ];
@@ -217,8 +223,8 @@ class CustomAlertDialog extends StatelessWidget {
             elevation: buttonElevation,
             borderRadius: borderRadius,
             splashBorderRadius: splashBorderRadius,
-            leftButtonloader: leftButtonloader,
-            rightButtonloader: rightButtonloader,
+            leftButtonLoader: leftButtonLoader,
+            rightButtonLoader: rightButtonLoader,
           ),
         ),
         SizedBox(height: 4.w),
@@ -245,7 +251,8 @@ class CustomAlertDialog extends StatelessWidget {
 }
 
 double _paddingScaleFactor(double textScaleFactor) {
-  final double clampedTextScaleFactor = textScaleFactor.clamp(1.0, 2.0).toDouble();
+  final double clampedTextScaleFactor =
+      textScaleFactor.clamp(1.0, 2.0).toDouble();
   // The final padding scale factor is clamped between 1/3 and 1. For example,
   // a non-scaled padding of 24 will produce a padding between 24 and 8.
   return lerpDouble(1.0, 1.0 / 3.0, clampedTextScaleFactor - 1.0)!;

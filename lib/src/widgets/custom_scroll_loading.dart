@@ -1,4 +1,4 @@
-part of custom_widgets;
+part of '../../custom_widgets.dart';
 
 enum LoadingStatus { loading, stable }
 
@@ -18,7 +18,7 @@ class CustomScrollLoading extends StatefulWidget {
   /// Used to determine if loading of new data has finished. You should use set this if you aren't using a FutureBuilder or StreamBuilder
   final bool isLoading;
 
-  /// Prevented update nested listview with other axis direction
+  /// Prevented update nested listView with other axis direction
   final Axis scrollDirection;
 
   final bool switchScroll;
@@ -27,7 +27,7 @@ class CustomScrollLoading extends StatefulWidget {
   final Widget loadingIndicator;
 
   const CustomScrollLoading({
-    Key? key,
+    super.key,
     required this.child,
     required this.onEndOfPage,
     this.scrollOffset = 150,
@@ -35,7 +35,7 @@ class CustomScrollLoading extends StatefulWidget {
     this.switchScroll = false,
     this.scrollDirection = Axis.vertical,
     this.loadingIndicator = const CircularProgressIndicator(),
-  }) : super(key: key);
+  });
 
   @override
   _CustomScrollLoadingState createState() => _CustomScrollLoadingState();
@@ -58,7 +58,9 @@ class _CustomScrollLoadingState extends State<CustomScrollLoading> {
       child: Column(
         children: [
           Expanded(child: widget.child),
-          loadMoreStatus == LoadingStatus.loading ? widget.loadingIndicator : const SizedBox(),
+          loadMoreStatus == LoadingStatus.loading
+              ? widget.loadingIndicator
+              : const SizedBox(),
         ],
       ),
       onNotification: (notification) => _onNotification(notification, context),
@@ -69,15 +71,21 @@ class _CustomScrollLoadingState extends State<CustomScrollLoading> {
     if (widget.scrollDirection == notification.metrics.axis) {
       if (notification is ScrollUpdateNotification) {
         if (widget.switchScroll) {
-          if (notification.metrics.maxScrollExtent < notification.metrics.pixels &&
-              notification.metrics.maxScrollExtent - notification.metrics.pixels >= widget.scrollOffset) {
+          if (notification.metrics.maxScrollExtent <
+                  notification.metrics.pixels &&
+              notification.metrics.maxScrollExtent -
+                      notification.metrics.pixels >=
+                  widget.scrollOffset) {
             if (notification.metrics.axisDirection == AxisDirection.up) {
               _loadMore();
             }
           }
         } else {
-          if (notification.metrics.maxScrollExtent > notification.metrics.pixels &&
-              notification.metrics.maxScrollExtent - notification.metrics.pixels <= widget.scrollOffset) {
+          if (notification.metrics.maxScrollExtent >
+                  notification.metrics.pixels &&
+              notification.metrics.maxScrollExtent -
+                      notification.metrics.pixels <=
+                  widget.scrollOffset) {
             if (notification.metrics.axisDirection == AxisDirection.down) {
               _loadMore();
             }

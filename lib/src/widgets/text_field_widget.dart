@@ -1,4 +1,4 @@
-part of custom_widgets;
+part of '../../custom_widgets.dart';
 
 class TextFieldWidget extends StatelessWidget {
   final TextEditingController? textEditingController;
@@ -34,7 +34,7 @@ class TextFieldWidget extends StatelessWidget {
   final Widget? label;
 
   const TextFieldWidget({
-    Key? key,
+    super.key,
     this.textEditingController,
     this.hintText,
     this.textInputType,
@@ -61,12 +61,12 @@ class TextFieldWidget extends StatelessWidget {
     this.maxLength,
     this.filled = false,
     this.fillColor,
-    this.hintStyle = const TextStyle(color: CustomColor.cgrey),
+    this.hintStyle = const TextStyle(color: CustomColor.cGrey),
     this.style,
     this.textCapitalization = TextCapitalization.none,
-    this.errorStyle = const TextStyle(color: CustomColor.cred),
+    this.errorStyle = const TextStyle(color: CustomColor.cRed),
     this.label,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -107,16 +107,25 @@ class TextFieldWidget extends StatelessWidget {
             hintText: hintText,
             errorStyle: errorStyle,
             focusedBorder: focusedBorder ??
-                const OutlineInputBorder(borderSide: BorderSide(color: CustomColor.cpurple, width: 1.5)),
-            enabledBorder:
-                enabledBorder ?? const OutlineInputBorder(borderSide: BorderSide(color: CustomColor.cpurple, width: 1)),
-            disabledBorder:
-                disabledBorder ?? const OutlineInputBorder(borderSide: BorderSide(color: CustomColor.cgrey, width: 1)),
-            errorBorder:
-                errorBorder ?? const OutlineInputBorder(borderSide: BorderSide(color: CustomColor.cred, width: 1.5)),
+                const OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: CustomColor.cPurple, width: 1.5)),
+            enabledBorder: enabledBorder ??
+                const OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: CustomColor.cPurple, width: 1)),
+            disabledBorder: disabledBorder ??
+                const OutlineInputBorder(
+                    borderSide: BorderSide(color: CustomColor.cGrey, width: 1)),
+            errorBorder: errorBorder ??
+                const OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: CustomColor.cRed, width: 1.5)),
             errorMaxLines: 2,
             focusedErrorBorder: focusedErrorBorder ??
-                const OutlineInputBorder(borderSide: BorderSide(color: CustomColor.cred, width: 1.5)),
+                const OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: CustomColor.cRed, width: 1.5)),
             hintStyle: hintStyle,
           ),
         ),

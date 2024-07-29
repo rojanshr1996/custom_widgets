@@ -1,4 +1,4 @@
-part of custom_widgets;
+part of '../../custom_widgets.dart';
 
 ///
 /// An enum defines all supported directions of shimmer effect
@@ -54,14 +54,14 @@ class CustomShimmer extends StatefulWidget {
   final bool enabled;
 
   const CustomShimmer({
-    Key? key,
+    super.key,
     required this.child,
     required this.gradient,
     this.direction = ShimmerDirection.ltr,
     this.period = const Duration(milliseconds: 1500),
     this.loop = 0,
     this.enabled = true,
-  }) : super(key: key);
+  });
 
   ///
   /// A convenient constructor provides an easy and convenient way to create a
@@ -69,7 +69,7 @@ class CustomShimmer extends StatefulWidget {
   /// `highlightColor`.
   ///
   CustomShimmer.fromColors({
-    Key? key,
+    super.key,
     required this.child,
     required Color baseColor,
     required Color highlightColor,
@@ -77,12 +77,23 @@ class CustomShimmer extends StatefulWidget {
     this.direction = ShimmerDirection.ltr,
     this.loop = 0,
     this.enabled = true,
-  })  : gradient = LinearGradient(
+  }) : gradient = LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.centerRight,
-            colors: <Color>[baseColor, baseColor, highlightColor, baseColor, baseColor],
-            stops: const <double>[0.0, 0.35, 0.5, 0.65, 1.0]),
-        super(key: key);
+            colors: <Color>[
+              baseColor,
+              baseColor,
+              highlightColor,
+              baseColor,
+              baseColor
+            ],
+            stops: const <double>[
+              0.0,
+              0.35,
+              0.5,
+              0.65,
+              1.0
+            ]);
 
   @override
   _CustomShimmerState createState() => _CustomShimmerState();
@@ -90,15 +101,19 @@ class CustomShimmer extends StatefulWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Gradient>('gradient', gradient, defaultValue: null));
+    properties.add(DiagnosticsProperty<Gradient>('gradient', gradient,
+        defaultValue: null));
     properties.add(EnumProperty<ShimmerDirection>('direction', direction));
-    properties.add(DiagnosticsProperty<Duration>('period', period, defaultValue: null));
-    properties.add(DiagnosticsProperty<bool>('enabled', enabled, defaultValue: null));
+    properties.add(
+        DiagnosticsProperty<Duration>('period', period, defaultValue: null));
+    properties
+        .add(DiagnosticsProperty<bool>('enabled', enabled, defaultValue: null));
     properties.add(DiagnosticsProperty<int>('loop', loop, defaultValue: 0));
   }
 }
 
-class _CustomShimmerState extends State<CustomShimmer> with SingleTickerProviderStateMixin {
+class _CustomShimmerState extends State<CustomShimmer>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   int _count = 0;
 
@@ -138,10 +153,10 @@ class _CustomShimmerState extends State<CustomShimmer> with SingleTickerProvider
       animation: _controller,
       child: widget.child,
       builder: (BuildContext context, Widget? child) => _Shimmer(
-        child: child,
         direction: widget.direction,
         gradient: widget.gradient,
         percent: _controller.value,
+        child: child,
       ),
     );
   }
@@ -160,11 +175,11 @@ class _Shimmer extends SingleChildRenderObjectWidget {
   final Gradient gradient;
 
   const _Shimmer({
-    Widget? child,
+    super.child,
     required this.percent,
     required this.direction,
     required this.gradient,
-  }) : super(child: child);
+  });
 
   @override
   _ShimmerFilter createRenderObject(BuildContext context) {
