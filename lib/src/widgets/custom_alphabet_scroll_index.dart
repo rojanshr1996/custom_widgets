@@ -314,7 +314,7 @@ class _CustomAlphabetScrollIndexState extends State<CustomAlphabetScrollIndex> {
                 width: 85,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: CustomColor.cPurple.withAlpha(170),
+                  color: CustomColor.cSkyBlue.withAlpha(170),
                 ),
                 child: Center(
                   child: Text(

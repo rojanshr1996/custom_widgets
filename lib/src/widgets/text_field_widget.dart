@@ -109,11 +109,11 @@ class TextFieldWidget extends StatelessWidget {
             focusedBorder: focusedBorder ??
                 const OutlineInputBorder(
                     borderSide:
-                        BorderSide(color: CustomColor.cPurple, width: 1.5)),
+                        BorderSide(color: CustomColor.cSkyBlue, width: 1.5)),
             enabledBorder: enabledBorder ??
                 const OutlineInputBorder(
                     borderSide:
-                        BorderSide(color: CustomColor.cPurple, width: 1)),
+                        BorderSide(color: CustomColor.cSkyBlue, width: 1)),
             disabledBorder: disabledBorder ??
                 const OutlineInputBorder(
                     borderSide: BorderSide(color: CustomColor.cGrey, width: 1)),
