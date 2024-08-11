@@ -98,10 +98,11 @@ class CustomTextField extends StatelessWidget {
         errorStyle: errorStyle,
         focusedBorder: focusedBorder ??
             const OutlineInputBorder(
-                borderSide: BorderSide(color: CustomColor.cPurple, width: 1.5)),
+                borderSide:
+                    BorderSide(color: CustomColor.cSkyBlue, width: 1.5)),
         enabledBorder: enabledBorder ??
             const OutlineInputBorder(
-                borderSide: BorderSide(color: CustomColor.cPurple, width: 1)),
+                borderSide: BorderSide(color: CustomColor.cSkyBlue, width: 1)),
         disabledBorder: disabledBorder ??
             const OutlineInputBorder(
                 borderSide: BorderSide(color: CustomColor.cGrey, width: 1)),

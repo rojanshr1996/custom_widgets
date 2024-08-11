@@ -17,7 +17,7 @@ class CustomSimpleCircularLoader extends StatelessWidget {
 
   const CustomSimpleCircularLoader(
       {super.key,
-      this.color = CustomColor.cPurple,
+      this.color = CustomColor.cSkyBlue,
       this.strokeWidth = 6.0,
       this.padding,
       this.backgroundColor,
