@@ -16,6 +16,9 @@ class CustomAlertDialog extends StatelessWidget {
   /// The amount of space by which to inset the child.
   final EdgeInsetsGeometry actionsPadding;
 
+  /// The amount of padding added to [MediaQueryData.viewInsets] on the outside of the dialog. This defines the minimum space between the screen's edges and the dialog.
+  final EdgeInsets? insetPadding;
+
   /// If [true] longer contents will be made scrollable
   final bool scrollable;
 
@@ -106,6 +109,7 @@ class CustomAlertDialog extends StatelessWidget {
     this.body,
     this.contentPadding = const EdgeInsets.fromLTRB(18.0, 16.0, 18.0, 16.0),
     this.actionsPadding = const EdgeInsets.fromLTRB(18.0, 16.0, 18.0, 16.0),
+    this.insetPadding,
     this.scrollable = false,
     this.leftButtonText = "",
     this.leftButtonFunction,
@@ -242,7 +246,8 @@ class CustomAlertDialog extends StatelessWidget {
     return Dialog(
       backgroundColor: backgroundColor,
       elevation: 3,
-      insetPadding: EdgeInsets.symmetric(horizontal: 38.5.w, vertical: 23.5.w),
+      insetPadding: insetPadding ??
+          EdgeInsets.symmetric(horizontal: 38.5.w, vertical: 23.5.w),
       clipBehavior: Clip.none,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.r)),
       child: dialogChild,
